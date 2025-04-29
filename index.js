@@ -1,12 +1,12 @@
 // Question 1
 
-function Employee(name, position, salary){
+function Employee(name, position, salary) {
     this.name = name;
     this.position = position
     this.salary = salary
 }
 
-const employees= [
+const employees = [
     new Employee("Tirsit", "developer", "80000"),
     new Employee("Lana", "senior developer", "120000"),
     new Employee("Ray", "manager", "200000"),
@@ -14,88 +14,106 @@ const employees= [
     new Employee("Hadid", "QA", "60000")
 ]
 
-employees.forEach(employee=>{
-    if (employee.position === "developer"){
-        employee.salary*= 1.10;
+employees.forEach(employee => {
+    if (employee.position === "developer") {
+        employee.salary *= 1.10;
     }
 
     console.log(`${employee.name}, ${employee.position}, $${employee.salary}`)
 })
 
 
+
+
+
 // Question 2
 
+const products = [
+    { name: "PC", price: 1500, inStock: true },
+    { name: "Half ring", price: 2, inStock: false },
+    { name: "book", price: 16, inStock: true },
+    { name: "vase", price: 23, inStock: true },
+];
+
+   
+
 function manageStock(products){
-const inStock= products.filter(product=> product.inStock).sort((a,b)=>a.price-b.price)
+    let productInstock=products.filter(product=>product.inStock===true);
+    productInstock.sort((a,b)=>a.price-b.price);
+    return productInstock;
+ };
+ console.log(manageStock(products));
 
-return inStock
-}
 
-const products=[
-    {name:"PC", price:1500, inStock:true},
-    {name:"Half ring", price:2, instock:false},
-    {name:"book", price:16, instock:true},
-    {name: "vase", price: 23, instock:true},
-]
 
-console.log(manageStock(products))
 
 //Question 3
 
-function calculateAve(grades){
-    for (let student in grades){
-        const scores= grades[student];
-        const average= scores.reduce((sum, score)=> sum + score, 0)/scores.length
-        const result = average> 70? "Pass": "Fail";
+function calculateAve(grades) {
+    for (let student in grades) {
+        const scores = grades[student];
+        const average = scores.reduce((sum, score) => sum + score, 0) / scores.length
+        const result = average > 70 ? "Pass" : "Fail";
         console.log(`${student}, Average=${average}, ${result}`)
     }
 }
 
 const grades = {
-Tirsit: [80,90,100],
-Queen: [85,80,70],
-Lucy: [24,52,79]
+    Tirsit: [80, 90, 100],
+    Queen: [85, 80, 70],
+    Lucy: [24, 52, 79]
 };
 
 calculateAve(grades)
 
 
 
-// let inActive=["Hellen"]
-// username.forEach(user=>{
-//     if (activeUsers.includes(user.username)){
-//         user.isActive= false
-//     }
-// });
+
 
 //Question 4
 
-function User(username, email, isActive){
-    this.username= username
-    this.email= email
-    this.isActive= isActive
+function User(username, email, isActive) {
+    this.username = username
+    this.email = email
+    this.isActive = isActive
 }
 
-const users=[
-    new User("Hellen","hellen@gmail.com", true),
-    new User ("Tirsit", "tirsitberihu@gmail.com", false),
-    new User ("Mercylin", "mercylinmuthoni@gmail.com", true),
+const users = [
+    new User("Hellen", "hellen@gmail.com", true),
+    new User("Tirsit", "tirsitberihu@gmail.com", false),
+    new User("Mercylin", "mercylinmuthoni@gmail.com", true),
 ]
-
-
-if (User.isActive= false){
-    console.log("This account has been deactivated")
-}
-
-
-const activeUsers=[];
-activeUsers.forEach(user=>{
-    if (user.isActive){
+let activeUsers = [];
+users.forEach(user => {
+    if (user.isActive === false) {
+        console.log(`${user.username}'s account has been deactivated`)
+    }else{
         activeUsers.push(user.username)
-    }
-})
+    };
+});
+console.log(activeUsers);
 
-console.log( activeUsers)
+
+
+
 
 //Question 5
 
+function destinationPlaces(destinations, maxDistance, budget) {
+    const affordTrip = destinations.filter(destination => destination.distance <= maxDistance && destination.budgetRequired <= budget);
+
+    if (affordTrip.length == 0) {
+        return "No destination available for this budget."
+    }
+    else {
+        return affordTrip
+    }
+}
+
+const destinations = [
+    { name: "NewYork", distance: 9800, budgetRequired: 1500 },
+    { name: "Villages of France ", distance: 4500, budgetRequired: 900 },
+    { name: "Addis", distance: 1300, budgetRequired: 500 }
+]
+console.log(destinationPlaces(destinations, 6700, 400));
+console.log(destinationPlaces(destinations, 6700, 1900));
